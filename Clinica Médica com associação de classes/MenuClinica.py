@@ -1,5 +1,5 @@
 def menu():
-    print('\n   CLINICA MÉDICA    ')
+    print('\n   Clinica Médica    ')
     print('\n1 - Cadastrar Paciente')
     print('2 - Cadastrar Médico')
     print('3 - Marcar Consulta')

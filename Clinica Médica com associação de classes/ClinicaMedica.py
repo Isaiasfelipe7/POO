@@ -1,4 +1,5 @@
 import MenuClinica
+from datetime import *
 
 class Paciente:
     def __init__(self, id_pac, nom_pac, dt_nasc, contato):
@@ -48,6 +49,14 @@ class ConsultaMedica:
         self.__data = data
         self.__pago = pago
         self.__data_retorno = True
+        fds = [5,6]
+
+        d = datetime.strptime(data,"%d/%m/%Y").date()
+        if (d <= date.today() or d.weekday() in fds):
+            raise ValueError("data de consulta menor que data atual ou caiu em final de semana")
+            print("Valor:", data)
+        else:
+            self.__data = datetime.strftime(data, '%d/%m/%Y').date()
 
     @property
     def id(self):
@@ -67,6 +76,15 @@ class ConsultaMedica:
     
     def __str__(self):
         return f'Consulta marcada para a data: {self.__data} \nPaciente: {self.__paciente.nome_paciente} \nMédico: {self.__medico.nome_medico}'
+    
+    def pagar_consulta(self):
+        self.__pago = True
+    
+    def agendar_consulta(self, data):
+        if self.__pago == True:
+            self.__data_retorno = data
+            print(f'Retorno agendado para o dia: {dt_ret.strftime('%d/%m/%Y')}')
+
 
 def main():
 
