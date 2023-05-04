@@ -61,7 +61,7 @@ class ConsultaMedica:
         self.__data_retorno = None
         fds = [5,6]
 
-        d = datetime.strptime(self.__data,"%d/%m/%Y").date()
+        d = datetime.strptime(data,"%d/%m/%Y").date()
         if (d <= date.today() or d.weekday() in fds):
             raise ValueError("data de consulta menor que data atual ou caiu em final de semana")
             print("Valor:", data)
@@ -101,7 +101,7 @@ class ConsultaMedica:
         print('\nSem permissão!')
 
     def __str__(self) -> str:
-        return f'\nConsulta marcada para a data: {self.__data} \nPaciente: {self.__paciente.nome_paciente} \nMédico: {self.__medico.nome_medico}'
+        return f'\nConsulta marcada para a data: {self.__data.strftime("%d/%m/%Y")}, {ConsultaMedica.dia_semana[self.__data.weekday()]}. \nPaciente: {self.__paciente.nome_paciente} \nMédico: {self.__medico.nome_medico}'
     
     def pagar_consulta(self):
         self.__pago = True
@@ -117,8 +117,8 @@ class ConsultaMedica:
 def main():
 
     consultas = []
-    pacientes = [Paciente(1, 'lore', '22/03/2004', 86994920631)]
-    medicos = [Medico(1, 1234, 'isa', 'ortopedista')]
+    pacientes = [Paciente(1, 'lorena', '22/03/2004', 86994920631)]
+    medicos = [Medico(1, 1234, 'isaias', 'ortopedista')]
 
     while True:
         MenuClinica.menu()
@@ -172,6 +172,18 @@ def main():
             consultas.append(consul)
 
             print(f'{consul}')
+        elif op == '4':
+            cont=0
+            for i,j in enumerate(consultas):
+                #seq+=1
+                if not j.pago:
+                    cont+=1
+                print(i,j)
+            if cont >0:
+                op1 = int(input("escolha um indice correspondente a consulta:"))
+                consultas[op1].pago = True
+            else:
+                print("Não existem consultas a serem pagas") 
         
 if __name__ == '__main__':
     main()
