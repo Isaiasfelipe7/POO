@@ -62,17 +62,33 @@ class ConsultaMedica:
     def id(self):
         return self.__id
     
+    @id.setter
+    def id(self, valor):
+        print('\nSem permissão!')
+    
     @property
     def data(self):
         return self.__data
+    
+    @data.setter
+    def data(self, valor):
+        print('\nSem permissão!')
     
     @property
     def pago(self):
         return self.__pago
     
+    @pago.setter
+    def pago(self, valor):
+        print('\nSem permissão!')
+    
     @property
     def data_retorno(self):
         return self.__data_retorno
+    
+    @data_retorno.setter
+    def data_retorno(self, valor):
+        print('\nSem permissão!')
     
     def __str__(self):
         return f'Consulta marcada para a data: {self.__data} \nPaciente: {self.__paciente.nome_paciente} \nMédico: {self.__medico.nome_medico}'
@@ -84,6 +100,8 @@ class ConsultaMedica:
         if self.__pago == True:
             self.__data_retorno = data
             print(f'Retorno agendado para o dia: {dt_ret.strftime('%d/%m/%Y')}')
+        else:
+            print("Consulta não foi paga!")
 
 
 def main():
@@ -98,8 +116,8 @@ def main():
         op = input('\nEscolha uma opção: ')
 
         isa = Paciente(16983573374, 'Isaias', '22/03/2004', 86994920631)
-        bru = Medico(78201234167, 40029, 'Bruno', 'Dentista')
-        conn = ConsultaMedica(1, bru, isa, '05/07/2030')
+        lore = Medico(78201234167, 40029, 'Lorena', 'Dentista')
+        conn = ConsultaMedica(1, lore, isa, '05/07/2030')
 
         print(f'\n{conn}')
         #print(f'{conn.} vai se consultar com o Dr.{conn.medico.nome_medico}')
