@@ -2,15 +2,18 @@ import MenuClinica
 from datetime import *
 
 class Paciente:
-    def __init__(self, id_pac, nom_pac, dt_nasc, contato):
+    def __init__(self, id_pac, nome_pac, dt_nasc, contato):
         self.__id_paciente = id_pac
-        self.nome_paciente = nom_pac
+        self.nome_paciente = nome_pac
         self.__dt_nasc = dt_nasc
         self.__contato = contato
 
     @property
     def id_paciente(self):
         return self.__id_paciente
+    
+    def nome_pasciente(self):
+        return self.nome_paciente
     
     @property
     def dt_nasc(self):
@@ -117,7 +120,7 @@ def main():
         op = input('\nEscolha uma opção: ')
         
         if op == '1':
-            id = int(input('Id paciente: '))
+            id = int(input('ID paciente: '))
             nome = str(input('Nome paciente: '))
             data = input('Data para a consulta: ')
             contato = input('Contato: ')
@@ -126,8 +129,43 @@ def main():
 
             pacientes.append(pasc)
 
-            print('Paciente cadastrado!')
+            print('\nPaciente cadastrado!')
+        elif op == '2':
+            id = int(input('ID médico: '))
+            crm = int(input('CRM: '))
+            nome = str(input('Nome médico: '))
+            esp = str(input('Especialidade: '))
 
+            med = Medico(id, crm, nome, esp)
 
+            medicos.append(med)
+
+            print('\nMédico cadatrado!')
+        elif op == '3':
+            id = int(input('ID consulta: '))
+            nome_med = str(input('Nome do médico: '))
+            nome_pac = str(input('Nome do paciente: '))
+            data_consul = input('Data da consulta: ')
+
+            medico = None
+            for med in medicos:
+                if med.nome_med == nome_med:
+                    medico = med
+            if not medico:
+                print('\nMédico não encontrado!')
+            
+            paciente = None
+            for pac in pacientes:
+                if pasc.nome_pac == nome_pac:
+                    paciente = pac
+            if not paciente:
+                print('\nPaciente não encontrado!')
+            
+            consul = ConsultaMedica(id, medico, paciente, data_consul)
+
+            consultas.append(consul)
+
+            print(f'{consul}')
+        
 if __name__ == '__main__':
     main()
