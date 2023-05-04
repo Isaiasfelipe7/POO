@@ -112,6 +112,7 @@ class ConsultaMedica:
         else:
             print("Consulta não foi paga!")
 def menu():
+    
     print('\n   Clinica Médica    ')
     print('\n1 - Cadastrar Paciente')
     print('2 - Cadastrar Médico')
@@ -120,7 +121,6 @@ def menu():
     print('5 - Cancelar Consulta')
     print('6 - Marcar Retorno')
     print('0 - Sair')
-
 
 def main():
 
