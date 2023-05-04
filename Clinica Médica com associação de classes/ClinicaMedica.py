@@ -5,7 +5,17 @@ class Paciente:
         self.__dt_nasc = dt_nasc
         self.__contato = contato
 
-    pass
+    @property
+    def id_paciente(self):
+        return self.__id_paciente
+    
+    @property
+    def dt_nasc(self):
+        return self.__dt_nasc
+    
+    @property
+    def contato(self):
+        return self.__contato
 
 class Medico:
     def __init__(self, id_medico, crm, nome_medico, esp):
@@ -14,7 +24,13 @@ class Medico:
         self.nome_medico = nome_medico
         self.especialidade = esp
 
-    pass
+    @property
+    def id_medico(self):
+        return self.__id_medico
+    
+    @property
+    def crm(self):
+        return self.__crm
 
 class ConsultaMedica:
     def __init__(self, id, medico, paciente, data, pago=False):
@@ -31,6 +47,38 @@ class ConsultaMedica:
         self.__pago = pago
         self.__data_retorno = True
 
+    @property
+    def id(self):
+        return self.__id
+    
+    @property
+    def data(self):
+        return self.__data
+    
+    @property
+    def pago(self):
+        return self.__pago
+    
+    @property
+    def data_retorno(self):
+        return self.__data_retorno
+    
     def __str__(self):
         return f'Consulta marcada para a data: {self.__data} \nPaciente: {self.__paciente.nome_paciente} \nMédico: {self.__medico.nome_medico}'
 
+def main():
+
+    consultas = []
+    pacientes = []
+    medicos = []
+
+    isa = Paciente(16983573374, 'Isaias', '22/03/2004', 86994920631)
+    bru = Medico(78201234167, 40029, 'Bruno', 'Dentista')
+    conn = ConsultaMedica(1, bru, isa, '05/07/2030')
+
+    print(conn)
+    #print(f'{conn.} vai se consultar com o Dr.{conn.medico.nome_medico}')
+
+
+if __name__ == '__main__':
+    main()
