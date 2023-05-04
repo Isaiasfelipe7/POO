@@ -12,7 +12,7 @@ class Paciente:
     def id_paciente(self):
         return self.__id_paciente
     
-    def nome_pasciente(self):
+    def nome_paciente(self):
         return self.nome_paciente
     
     @property
@@ -37,6 +37,12 @@ class Medico:
     @property
     def crm(self):
         return self.__crm
+    
+    def nome_medico(self):
+        return self.nome_medico
+
+    def especialidade(self):
+        return self.especialidade
 
 class ConsultaMedica:
     dia_semana = {0:'segunda-feira',1:'terça-feira',2:'quarta-feira',3:'quinta-feira',4:'sexta-feira'}
@@ -111,8 +117,8 @@ class ConsultaMedica:
 def main():
 
     consultas = []
-    pacientes = []
-    medicos = []
+    pacientes = [Paciente(1, 'lore', '22/03/2004', 86994920631)]
+    medicos = [Medico(1, 1234, 'isa', 'ortopedista')]
 
     while True:
         MenuClinica.menu()
@@ -121,8 +127,8 @@ def main():
         
         if op == '1':
             id = int(input('ID paciente: '))
-            nome = str(input('Nome paciente: '))
-            data = input('Data para a consulta: ')
+            nome = str(input('Nome do paciente: '))
+            data = input('Data de nascimento (DD/MM/AAAA): ')
             contato = input('Contato: ')
 
             pasc = Paciente(id, nome, data, contato)
@@ -133,7 +139,7 @@ def main():
         elif op == '2':
             id = int(input('ID médico: '))
             crm = int(input('CRM: '))
-            nome = str(input('Nome médico: '))
+            nome = str(input('Nome do médico: '))
             esp = str(input('Especialidade: '))
 
             med = Medico(id, crm, nome, esp)
@@ -144,19 +150,19 @@ def main():
         elif op == '3':
             id = int(input('ID consulta: '))
             nome_med = str(input('Nome do médico: '))
-            nome_pac = str(input('Nome do paciente: '))
+            nome_paciente = str(input('Nome do paciente: '))
             data_consul = input('Data da consulta: ')
 
             medico = None
             for med in medicos:
-                if med.nome_med == nome_med:
+                if med.nome_medico == nome_med:
                     medico = med
             if not medico:
                 print('\nMédico não encontrado!')
             
             paciente = None
             for pac in pacientes:
-                if pasc.nome_pac == nome_pac:
+                if med.nome_pa == nome_paciente:
                     paciente = pac
             if not paciente:
                 print('\nPaciente não encontrado!')
