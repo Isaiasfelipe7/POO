@@ -112,7 +112,7 @@ class ConsultaMedica:
         else:
             print("Consulta não foi paga!")
 def menu():
-    
+
     print('\n   Clinica Médica    ')
     print('\n1 - Cadastrar Paciente')
     print('2 - Cadastrar Médico')
@@ -176,7 +176,6 @@ def main():
                 print('\nPaciente não encontrado!')
             
             consul = ConsultaMedica(id, medico, paciente, data_consul)
-
             consultas.append(consul)
 
             print(f'{consul}')
