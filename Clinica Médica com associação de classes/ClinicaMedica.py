@@ -1,4 +1,3 @@
-import MenuClinica
 from datetime import *
 
 class Paciente:
@@ -112,6 +111,15 @@ class ConsultaMedica:
             print(f'Retorno agendado para o dia: {data.strftime("%d/%m/%Y")}')
         else:
             print("Consulta não foi paga!")
+def menu():
+    print('\n   Clinica Médica    ')
+    print('\n1 - Cadastrar Paciente')
+    print('2 - Cadastrar Médico')
+    print('3 - Marcar Consulta')
+    print('4 - Pagar Consulta')
+    print('5 - Cancelar Consulta')
+    print('6 - Marcar Retorno')
+    print('0 - Sair')
 
 
 def main():
@@ -121,7 +129,7 @@ def main():
     medicos = [Medico(1, 1234, 'isaias', 'ortopedista')]
 
     while True:
-        MenuClinica.menu()
+        menu()
 
         op = input('\nEscolha uma opção: ')
         
