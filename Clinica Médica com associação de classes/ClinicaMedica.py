@@ -61,12 +61,12 @@ class ConsultaMedica:
         self.__data_retorno = None
         fds = [5,6]
 
-        d = datetime.strptime(data,"%d/%m/%Y").date()
+        d = datetime.strptime(self.__data,"%d/%m/%Y").date()
         if (d <= date.today() or d.weekday() in fds):
             raise ValueError("data de consulta menor que data atual ou caiu em final de semana")
             print("Valor:", data)
         else:
-            self.__data = datetime.strftime(data, '%d/%m/%Y').date()
+            self.__data = datetime.strptime(data, '%d/%m/%Y').date()
 
     @property
     def id(self):
@@ -99,9 +99,9 @@ class ConsultaMedica:
     @data_retorno.setter
     def data_retorno(self, valor):
         print('\nSem permissão!')
-    
-    def __str__(self):
-        return f'Consulta marcada para a data: {self.__data} \nPaciente: {self.__paciente.nome_paciente} \nMédico: {self.__medico.nome_medico}'
+
+    def __str__(self) -> str:
+        return f'\nConsulta marcada para a data: {self.__data} \nPaciente: {self.__paciente.nome_paciente} \nMédico: {self.__medico.nome_medico}'
     
     def pagar_consulta(self):
         self.__pago = True
@@ -162,7 +162,7 @@ def main():
             
             paciente = None
             for pac in pacientes:
-                if med.nome_pa == nome_paciente:
+                if pac.nome_paciente == nome_paciente:
                     paciente = pac
             if not paciente:
                 print('\nPaciente não encontrado!')
