@@ -66,7 +66,7 @@ class ConsultaMedica:
             raise ValueError("data de consulta menor que data atual ou caiu em final de semana")
             print("Valor:", data)
         else:
-            self.__data = datetime.strptime(data, '%d/%m/%Y').date()
+            self.__data = datetime.strptime(data, "%d/%m/%Y").date()
 
     @property
     def id(self):
