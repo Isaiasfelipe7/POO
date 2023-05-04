@@ -109,7 +109,7 @@ class ConsultaMedica:
     def agendar_consulta(self, data):
         if self.__pago == True:
             self.__data_retorno = data
-            #print(f'Retorno agendado para o dia: {dt_ret.strftime('%d/%m/%Y')}')
+            print(f'Retorno agendado para o dia: {data.strftime("%d/%m/%Y")}')
         else:
             print("Consulta não foi paga!")
 
