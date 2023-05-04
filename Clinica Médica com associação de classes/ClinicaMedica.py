@@ -1,3 +1,5 @@
+import MenuClinica
+
 class Paciente:
     def __init__(self, id_pac, nom_pac, dt_nasc, contato):
         self.__id_paciente = id_pac
@@ -72,12 +74,17 @@ def main():
     pacientes = []
     medicos = []
 
-    isa = Paciente(16983573374, 'Isaias', '22/03/2004', 86994920631)
-    bru = Medico(78201234167, 40029, 'Bruno', 'Dentista')
-    conn = ConsultaMedica(1, bru, isa, '05/07/2030')
+    while True:
+        MenuClinica.menu()
 
-    print(conn)
-    #print(f'{conn.} vai se consultar com o Dr.{conn.medico.nome_medico}')
+        op = input('\nEscolha uma opção: ')
+
+        isa = Paciente(16983573374, 'Isaias', '22/03/2004', 86994920631)
+        bru = Medico(78201234167, 40029, 'Bruno', 'Dentista')
+        conn = ConsultaMedica(1, bru, isa, '05/07/2030')
+
+        print(f'\n{conn}')
+        #print(f'{conn.} vai se consultar com o Dr.{conn.medico.nome_medico}')
 
 
 if __name__ == '__main__':
