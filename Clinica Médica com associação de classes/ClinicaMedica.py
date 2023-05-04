@@ -36,6 +36,7 @@ class Medico:
         return self.__crm
 
 class ConsultaMedica:
+    dia_semana = {0:'segunda-feira',1:'terça-feira',2:'quarta-feira',3:'quinta-feira',4:'sexta-feira'}
     def __init__(self, id, medico, paciente, data, pago=False):
         self.__id = id
         if type(medico) == Medico:
@@ -48,7 +49,7 @@ class ConsultaMedica:
             raise 'Error!'
         self.__data = data
         self.__pago = pago
-        self.__data_retorno = True
+        self.__data_retorno = None
         fds = [5,6]
 
         d = datetime.strptime(data,"%d/%m/%Y").date()
@@ -114,13 +115,18 @@ def main():
         MenuClinica.menu()
 
         op = input('\nEscolha uma opção: ')
+        
+        if op == '1':
+            id = int(input('Id paciente: '))
+            nome = str(input('Nome paciente: '))
+            data = input('Data para a consulta: ')
+            contato = input('Contato: ')
 
-        isa = Paciente(16983573374, 'Isaias', '22/03/2004', 86994920631)
-        lore = Medico(78201234167, 40029, 'Lorena', 'Dentista')
-        conn = ConsultaMedica(1, lore, isa, '05/07/2030')
+            pasc = Paciente(id, nome, data, contato)
 
-        print(f'\n{conn}')
-        #print(f'{conn.} vai se consultar com o Dr.{conn.medico.nome_medico}')
+            pacientes.append(pasc)
+
+            print('Paciente cadastrado!')
 
 
 if __name__ == '__main__':
