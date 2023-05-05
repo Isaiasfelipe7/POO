@@ -208,15 +208,26 @@ def main():
                 ConsultaMedica.pagar_consulta(consultas[op1])
             else:
                 print('\nNão existem consultas a serem pagas')
+        elif op == '5':
+            id_consulta = input("Entre com o ID da consulta:")
+            consulta = None
+            for c in consultas:
+                if c.id == id_consulta:
+                    consulta = c
+                    break
+            if not consulta:
+                print("Consulta não encontrada!")
+                continue
+            consultas.remove(consulta)
         elif op == '6':
             pac = str(input('Nome do paciente: '))
             c = 0
 
             for i, b in enumerate(consultas):
                 if b.paciente == pac:
-                    i += 1
+                    c += 1
                     print(f'ID {i} - {b}')
-            if i > 0:
+            if c > 0:
                 id = int(input('Id da consulta: '))
                 dat_ret_max = consultas[id].data+timedelta(days=30)
                 print(f'Data máxima de retorno: {dat_ret_max.strftime("%d/%m/%Y")}')
