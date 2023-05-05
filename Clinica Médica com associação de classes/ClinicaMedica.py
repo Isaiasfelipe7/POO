@@ -100,7 +100,7 @@ class ConsultaMedica:
         print('\nSem permissão!')
 
     def __str__(self) -> str:
-        return f'\nConsulta marcada para a data: {self.__data.strftime("%d/%m/%Y")}, {ConsultaMedica.dia_semana[self.__data.weekday()]}. \nPaciente: {self.__paciente.nome_paciente} \nMédico: {self.__medico.nome_medico}'
+        return f'Consulta marcada para a data: {self.__data.strftime("%d/%m/%Y")}, {ConsultaMedica.dia_semana[self.__data.weekday()]}, Paciente: {self.__paciente.nome_paciente}, Médico: {self.__medico.nome_medico}'
     
     def pagar_consulta(self):
         self.__pago = True
@@ -161,7 +161,7 @@ def main():
             id = int(input('ID consulta: '))
             nome_med = str(input('Nome do médico: '))
             nome_paciente = str(input('Nome do paciente: '))
-            data_consul = input('Data da consulta (DD/MM/AAA): ')
+            data_consul = input('Data da consulta (DD/MM/AAA): \n')
 
             medico = None
             for med in medicos:
@@ -186,9 +186,9 @@ def main():
             for i,j in enumerate(consultas):
                 if not j.pago:
                     cont+=1
-                print(i,j)
+                print(f'ID {i} - {j}')
             if cont > 0:
-                op1 = int(input("Escolha um indice correspondente a consulta:"))
+                op1 = int(input('Escolha um indice correspondente a consulta: '))
                 ConsultaMedica.pagar_consulta(consultas[op1])
             else:
                 print("Não existem consultas a serem pagas")
@@ -197,9 +197,9 @@ def main():
             c = 0
 
             for i, b in enumerate(consultas):
-                if j.paciente == pac:
+                if pac == b.paciente:
                     c += 1
-                    print(i, j)
+                    print(f'ID {i} - {b}')
             if c > 0:
                 id = int(input('Id da consulta: '))
                 dat_ret_max = consultas[id].data+timedelta(days=30)
