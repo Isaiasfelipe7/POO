@@ -76,6 +76,22 @@ class ConsultaMedica:
         print('\nSem permissão!')
     
     @property
+    def medico(self):
+        return self.__medico
+    
+    @medico.setter
+    def medico(self, valor):
+        print('\nSem permissão!')
+    
+    @property
+    def paciente(self):
+        return self.__paciente
+    
+    @paciente.setter
+    def paciente(self, valor):
+        print('\nSem permissão!')
+    
+    @property
     def data(self):
         return self.__data
     
@@ -161,7 +177,7 @@ def main():
             id = int(input('ID consulta: '))
             nome_med = str(input('Nome do médico: '))
             nome_paciente = str(input('Nome do paciente: '))
-            data_consul = input('Data da consulta (DD/MM/AAA): \n')
+            data_consul = input('Data da consulta (DD/MM/AAA): ')
 
             medico = None
             for med in medicos:
@@ -191,16 +207,16 @@ def main():
                 op1 = int(input('Escolha um indice correspondente a consulta: '))
                 ConsultaMedica.pagar_consulta(consultas[op1])
             else:
-                print("Não existem consultas a serem pagas")
+                print('\nNão existem consultas a serem pagas')
         elif op == '6':
             pac = str(input('Nome do paciente: '))
             c = 0
 
             for i, b in enumerate(consultas):
-                if pac == b.paciente:
-                    c += 1
+                if b.paciente == pac:
+                    i += 1
                     print(f'ID {i} - {b}')
-            if c > 0:
+            if i > 0:
                 id = int(input('Id da consulta: '))
                 dat_ret_max = consultas[id].data+timedelta(days=30)
                 print(f'Data máxima de retorno: {dat_ret_max.strftime("%d/%m/%Y")}')
