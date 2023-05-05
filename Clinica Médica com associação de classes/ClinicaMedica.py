@@ -106,7 +106,7 @@ class ConsultaMedica:
         self.__pago = True
         print(f'\nConsulta paga!')
     
-    def agendar_consulta(self, data):
+    def agendar_retorno(self, data):
         if self.__pago == True:
             self.__data_retorno = data
             print(f'Retorno agendado para o dia: {data.strftime("%d/%m/%Y")}')
@@ -192,6 +192,26 @@ def main():
                 ConsultaMedica.pagar_consulta(consultas[op1])
             else:
                 print("Não existem consultas a serem pagas")
+        elif op == '6':
+            pac = str(input('Nome do paciente: '))
+            c = 0
+
+            for i, b in enumerate(consultas):
+                if j.paciente == pac:
+                    c += 1
+                    print(i, j)
+            if c > 0:
+                id = int(input('Id da consulta: '))
+                dat_ret_max = consultas[id].data+timedelta(days=30)
+                print(f'Data máxima de retorno: {dat_ret_max.strftime("%d/%m/%Y")}')
+                dat_retor = input('Entre com a data de retorno: ')
+                dat_retor = datetime.strptime(dat_retor, "%d/%m/%Y").date()
+                if dat_retor > dat_ret_max:
+                    print('\nData de retorno inválida!')
+                else:
+                    consultas[id].agendar_retorno(dat_retor)
+            else:
+                print('\nNão há consultas marcadas para este paciente.')
 
         elif op == '7':
             if not consultas:
