@@ -125,8 +125,8 @@ def menu():
 def main():
 
     consultas = []
-    pacientes = [Paciente(1, 'lorena', '22/03/2004', 86994920631)]
-    medicos = [Medico(1, 1234, 'isaias', 'ortopedista')]
+    pacientes = [Paciente(1, 'lorena', '22/03/2004', 86994920631), Paciente(2, 'katharina', '14/06/2005', 86995672129)]
+    medicos = [Medico(1, 1234, 'isaias', 'ortopedista'), Medico(2, 5678, 'murilo', 'dermatologista')]
 
     while True:
         menu()
@@ -159,7 +159,7 @@ def main():
             id = int(input('ID consulta: '))
             nome_med = str(input('Nome do médico: '))
             nome_paciente = str(input('Nome do paciente: '))
-            data_consul = input('Data da consulta: ')
+            data_consul = input('Data da consulta (DD/MM/AAA): ')
 
             medico = None
             for med in medicos:
@@ -190,7 +190,7 @@ def main():
                 op1 = int(input("escolha um indice correspondente a consulta:"))
                 consultas[op1].pago = True
             else:
-                print("Não existem consultas a serem pagas") 
+                print("Não existem consultas a serem pagas")
         
 if __name__ == '__main__':
     main()
