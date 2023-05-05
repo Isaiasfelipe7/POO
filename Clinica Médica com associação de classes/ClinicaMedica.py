@@ -104,6 +104,7 @@ class ConsultaMedica:
     
     def pagar_consulta(self):
         self.__pago = True
+        print(f'\nConsulta paga!')
     
     def agendar_consulta(self, data):
         if self.__pago == True:
@@ -120,6 +121,7 @@ def menu():
     print('4 - Pagar Consulta')
     print('5 - Cancelar Consulta')
     print('6 - Marcar Retorno')
+    print('7 - Consultas marcadas')
     print('0 - Sair')
 
 def main():
@@ -180,17 +182,23 @@ def main():
 
             print(f'{consul}')
         elif op == '4':
-            cont=0
+            cont = 0
             for i,j in enumerate(consultas):
-                #seq+=1
                 if not j.pago:
                     cont+=1
                 print(i,j)
-            if cont >0:
-                op1 = int(input("escolha um indice correspondente a consulta:"))
-                consultas[op1].pago = True
+            if cont > 0:
+                op1 = int(input("Escolha um indice correspondente a consulta:"))
+                ConsultaMedica.pagar_consulta(consultas[op1])
             else:
                 print("Não existem consultas a serem pagas")
+
+        elif op == '7':
+            if not consultas:
+                print('\nNão há consultas marcadas!')
+            else:
+                for i in consultas:
+                    print(i)
         
 if __name__ == '__main__':
     main()
