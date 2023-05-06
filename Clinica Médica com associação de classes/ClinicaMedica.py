@@ -148,8 +148,8 @@ def menu():
 def main():
 
     consultas = []
-    pacientes = [Paciente(12345678901, 'mateus', '22/03/2004', 86994289101), Paciente(20987634265, 'maria', '14/06/2005', 86995672129)]
-    medicos = [Medico(98765432182, 1234, 'isaias', 'ortopedista'), Medico(16725162187, 5678, 'orlando', 'dermatologista')]
+    pacientes = [Paciente(12345678901, 'mateus', '22/03/2004', 86994289101), Paciente(20987634265, 'maria', '14/06/2005', 86995672129), Paciente(98732465161, 'adrian', '11/12/1997', 86994523211)]
+    medicos = [Medico(98765432182, 1234, 'pedro', 'ortopedista'), Medico(16725162187, 5678, 'orlando', 'dermatologista'), Medico(98076212309, 4567, 'marcio', 'neurocirurgia')]
 
     while True:
         menu()
