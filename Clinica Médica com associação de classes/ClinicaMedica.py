@@ -22,7 +22,7 @@ class Paciente:
     def contato(self):
         return self.__contato
     
-    def __str__(self) -> str:
+    def __str__(self):
         return f'Nome do Paciente: {self.nome} \t Data.Nasc.:{self.__dt_nasc}'
 
 class Medico:
@@ -46,7 +46,7 @@ class Medico:
     def especialidade(self):
         return self.especialidade
     
-    def __str__(self) -> str:
+    def __str__(self):
         return f'Nome do médico:{self.nome_medico} \n CRM:{self.__crm} \n Especialidade:{self.especialidade}'
 
 class ConsultaMedica:
