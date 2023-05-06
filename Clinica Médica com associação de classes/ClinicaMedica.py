@@ -21,6 +21,9 @@ class Paciente:
     @property
     def contato(self):
         return self.__contato
+    
+    def __str__(self) -> str:
+        return f'Nome do Paciente: {self.nome} \t Data.Nasc.:{self.__dt_nasc}'
 
 class Medico:
     def __init__(self, id_medico, crm, nome_medico, esp):
@@ -42,6 +45,9 @@ class Medico:
 
     def especialidade(self):
         return self.especialidade
+    
+    def __str__(self) -> str:
+        return f'Nome do médico:{self.nome_medico} \n CRM:{self.__crm} \n Especialidade:{self.especialidade}'
 
 class ConsultaMedica:
     dia_semana = {0:'segunda-feira',1:'terça-feira',2:'quarta-feira',3:'quinta-feira',4:'sexta-feira'}
@@ -116,7 +122,7 @@ class ConsultaMedica:
         print('\nSem permissão!')
 
     def __str__(self) -> str:
-        return f'Consulta marcada para a data: {self.__data.strftime("%d/%m/%Y")}, {ConsultaMedica.dia_semana[self.__data.weekday()]}, Paciente: {self.__paciente.nome_paciente}, Médico: {self.__medico.nome_medico}'
+        return f'\nConsulta {self.__id} marcada para a data: {self.__data.strftime("%d/%m/%Y")}, {ConsultaMedica.dia_semana[self.__data.weekday()]}, Paciente: {self.__paciente.nome_paciente}, Médico: {self.__medico.nome_medico}'
     
     def pagar_consulta(self):
         self.__pago = True
@@ -137,14 +143,13 @@ def menu():
     print('4 - Pagar Consulta')
     print('5 - Cancelar Consulta')
     print('6 - Marcar Retorno')
-    print('7 - Consultas marcadas')
-    print('0 - Sair')
+    print('7 - Sair')
 
 def main():
 
     consultas = []
-    pacientes = [Paciente(1, 'lorena', '22/03/2004', 86994920631), Paciente(2, 'katharina', '14/06/2005', 86995672129)]
-    medicos = [Medico(1, 1234, 'isaias', 'ortopedista'), Medico(2, 5678, 'murilo', 'dermatologista')]
+    pacientes = [Paciente(12345678901, 'mateus', '22/03/2004', 86994289101), Paciente(20987634265, 'maria', '14/06/2005', 86995672129)]
+    medicos = [Medico(98765432182, 1234, 'isaias', 'ortopedista'), Medico(16725162187, 5678, 'orlando', 'dermatologista')]
 
     while True:
         menu()
@@ -152,16 +157,16 @@ def main():
         op = input('\nEscolha uma opção: ')
         
         if op == '1':
-            id = int(input('ID paciente: '))
+            cpf = int(input('CPF do paciente: '))
             nome = str(input('Nome do paciente: '))
             data = input('Data de nascimento (DD/MM/AAAA): ')
             contato = input('Contato: ')
 
-            pasc = Paciente(id, nome, data, contato)
+            pasc = Paciente(cpf, nome, data, contato)
 
             pacientes.append(pasc)
 
-            print('\nPaciente cadastrado!')
+            print(f'\nPaciente {nome} cadastrado!')
         elif op == '2':
             id = int(input('ID médico: '))
             crm = int(input('CRM: '))
@@ -172,9 +177,9 @@ def main():
 
             medicos.append(med)
 
-            print('\nMédico cadatrado!')
+            print(f'\nMédico {nome} cadatrado!')
         elif op == '3':
-            id = int(input('ID consulta: '))
+            id = int(input('Id consulta: '))
             nome_med = str(input('Nome do médico: '))
             nome_paciente = str(input('Nome do paciente: '))
             data_consul = input('Data da consulta (DD/MM/AAA): ')
@@ -202,36 +207,34 @@ def main():
             for i,j in enumerate(consultas):
                 if not j.pago:
                     cont+=1
-                print(f'ID {i} - {j}')
+                print(f'Indíce {i}: {j}')
             if cont > 0:
                 op1 = int(input('Escolha um indice correspondente a consulta: '))
                 ConsultaMedica.pagar_consulta(consultas[op1])
             else:
                 print('\nNão existem consultas a serem pagas')
         elif op == '5':
-            id_consulta = input("Entre com o ID da consulta:")
-            consulta = None
-            for c in consultas:
-                if c.id == id_consulta:
-                    consulta = c
-                    break
-            if not consulta:
-                print("Consulta não encontrada!")
-                continue
-            consultas.remove(consulta)
+            if not consultas:
+                print('\nNão há consultas marcadas para cancelar!')
+            else:
+                for i, con in enumerate(consultas):
+                    print(f'Indice {i}: {con}')
+                    cancel = int(input('Indice da consulta para cancelar: '))
+                    del consultas[cancel]
+                    print(f'\nA consulta com o indice {i} cancelada!')
         elif op == '6':
             pac = str(input('Nome do paciente: '))
             c = 0
 
             for i, b in enumerate(consultas):
-                if b.paciente == pac:
+                if b._ConsultaMedica__paciente.nome_paciente == pac:
                     c += 1
-                    print(f'ID {i} - {b}')
+                    print(f'Indíce {i}: {b}')
             if c > 0:
-                id = int(input('Id da consulta: '))
+                id = int(input('Indice da consulta: '))
                 dat_ret_max = consultas[id].data+timedelta(days=30)
                 print(f'Data máxima de retorno: {dat_ret_max.strftime("%d/%m/%Y")}')
-                dat_retor = input('Entre com a data de retorno: ')
+                dat_retor = input('Data de retorno: ')
                 dat_retor = datetime.strptime(dat_retor, "%d/%m/%Y").date()
                 if dat_retor > dat_ret_max:
                     print('\nData de retorno inválida!')
@@ -241,11 +244,10 @@ def main():
                 print('\nNão há consultas marcadas para este paciente.')
 
         elif op == '7':
-            if not consultas:
-                print('\nNão há consultas marcadas!')
-            else:
-                for i in consultas:
-                    print(i)
+            print('\nVocê saiu. . .')
+            break
+        else:
+            print('\nOpção Inválida. Tente Novamente!')
         
 if __name__ == '__main__':
     main()
