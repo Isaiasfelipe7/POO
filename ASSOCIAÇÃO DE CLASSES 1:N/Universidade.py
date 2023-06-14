@@ -1,4 +1,8 @@
-class Sisu:
+
+# ISAIAS FELIPE
+# SÁVYO GABRIEL
+
+class Sisu(object):
     __universidades = []
 
     @staticmethod
