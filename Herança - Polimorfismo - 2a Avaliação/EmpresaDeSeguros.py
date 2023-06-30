@@ -1,3 +1,6 @@
+# ISAIAS FELIPE
+# SÁVYO GABRIEL
+
 class Seguro:
     def __init__(self, num_apolice, proprietario, valor_seguro, valor_premio):
         self._num_apolice = num_apolice
